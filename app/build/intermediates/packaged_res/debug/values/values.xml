@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HabitFlow</string>
+    <string name="channel_desc">Notificações inteligentes dos seus hábitos</string>
+    <string name="channel_id">habitflow_notifications</string>
+    <string name="channel_name">Lembretes de Hábitos</string>
+    <style name="Theme.HabitFlow" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>

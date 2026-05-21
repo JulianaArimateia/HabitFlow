@@ -1,0 +1,2 @@
+-keep class com.habitflow.data.db.** { *; }
+-keepclassmembers class * extends androidx.room.RoomDatabase { *; }

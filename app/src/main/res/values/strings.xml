@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HabitFlow</string>
+    <string name="channel_id">habitflow_notifications</string>
+    <string name="channel_name">Lembretes de Hábitos</string>
+    <string name="channel_desc">Notificações inteligentes dos seus hábitos</string>
+</resources>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Head -50)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\User\\\\OneDrive\\\\Desktop\\\\App20\" | ForEach-Object { $_.Name })",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\User\\\\OneDrive\\\\Desktop\\\\App20\\\\app\\\\src\\\\main\\\\res\\\\drawable\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\User\\\\OneDrive\\\\Desktop\\\\App20\\\\app\\\\src\\\\main\\\\res\\\\mipmap-anydpi-v26\")",
+      "PowerShell([System.IO.Directory]::GetFiles\\(\"C:\\\\Program Files\\\\Android\\\\Android Studio\\\\jbr\\\\bin\"\\) | ForEach-Object { Split-Path $_ -Leaf } | Select-Object -First 10)"
+    ]
+  }
+}
