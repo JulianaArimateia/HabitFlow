@@ -1,0 +1,12 @@
+# Gradle arquivos temporários e builds
+.gradle/
+build/
+
+.idea/
+*.iml
+.vscode/
+
+local.properties
+
+# Outros arquivos do sistema
+.DS_Store
