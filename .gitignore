@@ -10,3 +10,10 @@ local.properties
 
 # Outros arquivos do sistema
 .DS_Store
+
+# Ignorar relatórios de problemas
+.idea/
+build/
+.gradle/
+local.properties
+C:/
