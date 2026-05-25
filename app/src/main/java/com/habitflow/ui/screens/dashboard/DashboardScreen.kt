@@ -75,26 +75,26 @@ fun DashboardScreen(
                         Text(
                             "HabitFlow",
                             style = MaterialTheme.typography.titleLarge,
-                            color = Primary,
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             "Dashboard Mensal",
                             style = MaterialTheme.typography.bodySmall,
-                            color = OnSurfaceVar
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 },
                 actions = {
                     IconButton(onClick = { viewModel.refresh() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "Atualizar", tint = OnSurfaceVar)
+                        Icon(Icons.Default.Refresh, contentDescription = "Atualizar", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Background)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Surface) {
+            NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 NavigationBarItem(
                     selected = false,
                     onClick = onNavigateToHome,
@@ -109,11 +109,11 @@ fun DashboardScreen(
                 )
             }
         },
-        containerColor = Background
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         if (state.isLoading) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(color = Primary)
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
             return@Scaffold
         }
@@ -132,7 +132,7 @@ fun DashboardScreen(
                 Text(
                     "Seus Hábitos",
                     style = MaterialTheme.typography.titleLarge,
-                    color = OnBackground,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -141,7 +141,7 @@ fun DashboardScreen(
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Surface)
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                     ) {
                         Box(
                             Modifier.fillMaxWidth().padding(32.dp),
@@ -149,7 +149,7 @@ fun DashboardScreen(
                         ) {
                             Text(
                                 "Nenhum hábito cadastrado",
-                                color = OnSurfaceVar,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -170,7 +170,7 @@ private fun WeatherCard(weather: WeatherData) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
@@ -184,13 +184,13 @@ private fun WeatherCard(weather: WeatherData) {
                     "${weather.temperature.toInt()}°C  •  ${weather.description}",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = OnBackground
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
                     weather.habitSuggestion,
                     style = MaterialTheme.typography.bodySmall,
-                    color = OnSurfaceVar
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -202,7 +202,7 @@ private fun StreakCard(streak: Int) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = Primary),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
@@ -213,7 +213,7 @@ private fun StreakCard(streak: Int) {
                 Text(
                     "OFENSIVA ATUAL",
                     style = MaterialTheme.typography.labelSmall,
-                    color = OnPrimary.copy(alpha = 0.7f),
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
                     letterSpacing = 1.5.sp
                 )
                 Spacer(Modifier.height(8.dp))
@@ -221,7 +221,7 @@ private fun StreakCard(streak: Int) {
                     Text(
                         "$streak",
                         style = MaterialTheme.typography.headlineLarge,
-                        color = OnPrimary,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = 48.sp
                     )
@@ -229,7 +229,7 @@ private fun StreakCard(streak: Int) {
                     Text(
                         "dias seguidos",
                         style = MaterialTheme.typography.titleMedium,
-                        color = OnPrimary,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
@@ -238,7 +238,7 @@ private fun StreakCard(streak: Int) {
                     if (streak >= 7) "Você está arrasando! Continue assim!"
                     else "Continue para manter sua sequência!",
                     style = MaterialTheme.typography.bodySmall,
-                    color = OnPrimary.copy(alpha = 0.8f)
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
                 )
             }
             Text(
@@ -287,14 +287,14 @@ private fun MetricCard(
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(Modifier.padding(16.dp)) {
             Icon(icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(20.dp))
             Spacer(Modifier.height(8.dp))
-            Text(label, style = MaterialTheme.typography.bodySmall, color = OnSurfaceVar)
-            Text(value, style = MaterialTheme.typography.titleLarge, color = OnBackground, fontWeight = FontWeight.Bold)
+            Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(value, style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold)
         }
     }
 }
@@ -304,7 +304,7 @@ private fun WeeklyChart(last7Days: List<Float>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(Modifier.padding(20.dp)) {
@@ -312,14 +312,14 @@ private fun WeeklyChart(last7Days: List<Float>) {
                 "Consistência Semanal",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = OnBackground
+                color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(Modifier.height(4.dp))
             val avg = if (last7Days.isNotEmpty()) last7Days.average() else 0.0
             Text(
                 "Média de ${String.format("%.1f", avg * 100)}% nos últimos 7 dias",
                 style = MaterialTheme.typography.bodySmall,
-                color = OnSurfaceVar
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(Modifier.height(16.dp))
             WeeklyBarChart(data = last7Days, modifier = Modifier.fillMaxWidth().height(120.dp))
@@ -332,7 +332,7 @@ private fun MonthlyHeatmap(data: Map<Long, Int>) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(Modifier.padding(20.dp)) {
@@ -345,14 +345,14 @@ private fun MonthlyHeatmap(data: Map<Long, Int>) {
                     "Atividade Mensal",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = OnBackground
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Text(
                     java.text.SimpleDateFormat("MMMM", Locale("pt", "BR"))
                         .format(java.util.Date())
                         .replaceFirstChar { it.uppercase() },
                     style = MaterialTheme.typography.bodySmall,
-                    color = OnSurfaceVar
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Spacer(Modifier.height(16.dp))
@@ -362,7 +362,7 @@ private fun MonthlyHeatmap(data: Map<Long, Int>) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text("Menos", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVar)
+                Text("Menos", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 listOf(HeatmapEmpty, HeatmapLow, HeatmapMid, HeatmapHigh).forEach { color ->
                     Box(
                         modifier = Modifier
@@ -371,7 +371,7 @@ private fun MonthlyHeatmap(data: Map<Long, Int>) {
                             .background(color)
                     )
                 }
-                Text("Mais", style = MaterialTheme.typography.labelSmall, color = OnSurfaceVar)
+                Text("Mais", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     }
@@ -382,7 +382,7 @@ private fun HabitConsistencyCard(hc: HabitConsistency) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
@@ -419,7 +419,7 @@ private fun HabitConsistencyCard(hc: HabitConsistency) {
                 Text(
                     "${hc.rate.toInt()}%",
                     style = MaterialTheme.typography.titleMedium,
-                    color = Primary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
                 Text(

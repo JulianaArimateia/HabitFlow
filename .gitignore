@@ -17,3 +17,13 @@ build/
 .gradle/
 local.properties
 C:/
+
+jdk-17.0.14+7/
+*.tar.gz
+
+# Pastas locais de ferramentas de IA
+.claude/
+
+# Arquivos temporários do Python
+__pycache__/
+*.pyc

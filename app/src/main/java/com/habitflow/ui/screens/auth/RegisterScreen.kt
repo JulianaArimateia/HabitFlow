@@ -48,10 +48,10 @@ fun RegisterScreen(
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Background)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
-        containerColor = Background
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -64,21 +64,21 @@ fun RegisterScreen(
             Text(
                 "Criar Conta",
                 style = MaterialTheme.typography.headlineMedium,
-                color = Primary,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.ExtraBold
             )
             Spacer(Modifier.height(8.dp))
             Text(
                 "Comece sua jornada de hábitos",
                 style = MaterialTheme.typography.bodyMedium,
-                color = OnSurfaceVar
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(Modifier.height(32.dp))
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Surface),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column(Modifier.padding(24.dp)) {
@@ -138,7 +138,7 @@ fun RegisterScreen(
                         onClick = { viewModel.register(username, password, confirm) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Primary),
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                         contentPadding = PaddingValues(vertical = 16.dp)
                     ) {
                         Text("Criar Conta", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
@@ -148,8 +148,9 @@ fun RegisterScreen(
 
             Spacer(Modifier.height(20.dp))
             TextButton(onClick = onNavigateToLogin) {
-                Text("Já tenho conta. Entrar", color = Primary)
+                Text("Já tenho conta. Entrar", color = MaterialTheme.colorScheme.primary)
             }
         }
     }
 }
+

@@ -1,7 +1,23 @@
 package com.habitflow.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+
+private val DarkColorScheme = darkColorScheme(
+    primary            = PrimaryDarkTheme,
+    onPrimary          = OnPrimaryDarkTheme,
+    primaryContainer   = PrimaryLightDarkTheme,
+    onPrimaryContainer = PrimaryDarkDarkTheme,
+    secondary          = SecondaryDarkTheme,
+    background         = BackgroundDarkTheme,
+    surface            = SurfaceDarkTheme,
+    onBackground       = OnBackgroundDarkTheme,
+    onSurface          = OnSurfaceDarkTheme,
+    error              = ErrorDarkTheme,
+    surfaceVariant     = SurfaceDarkTheme,
+    onSurfaceVariant   = OnSurfaceVarDarkTheme,
+)
 
 private val LightColorScheme = lightColorScheme(
     primary            = Primary,
@@ -19,9 +35,18 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun HabitFlowTheme(content: @Composable () -> Unit) {
+fun HabitFlowTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val colorScheme = if (darkTheme) {
+        DarkColorScheme
+    } else {
+        LightColorScheme
+    }
+
     MaterialTheme(
-        colorScheme = LightColorScheme,
+        colorScheme = colorScheme,
         typography  = Typography,
         content     = content
     )

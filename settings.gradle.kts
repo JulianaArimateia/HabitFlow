@@ -5,6 +5,11 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -14,9 +19,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "HabitFlow"
 include(":app")
-
-// Redirect build output outside OneDrive to avoid file-lock issues during sync
-val buildBase = File("C:/Users/Juliana/AppData/Local/Temp/HabitFlowBuild")
-gradle.allprojects {
-    layout.buildDirectory.set(buildBase.resolve(project.name))
-}

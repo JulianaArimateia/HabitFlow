@@ -39,7 +39,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Background)
+            .background(MaterialTheme.colorScheme.background)
             .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -47,28 +47,28 @@ fun LoginScreen(
         Text(
             text = "HabitFlow",
             style = MaterialTheme.typography.headlineLarge,
-            color = Primary,
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.ExtraBold
         )
         Spacer(Modifier.height(4.dp))
         Text(
             text = "Construa hábitos que duram",
             style = MaterialTheme.typography.bodyMedium,
-            color = OnSurfaceVar
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.height(48.dp))
 
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Surface),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(Modifier.padding(24.dp)) {
                 Text(
                     "Entrar",
                     style = MaterialTheme.typography.titleLarge,
-                    color = OnBackground
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(Modifier.height(20.dp))
 
@@ -101,10 +101,10 @@ fun LoginScreen(
                     shape = RoundedCornerShape(12.dp)
                 )
 
-                if (uiState is AuthUiState.Error) {
+            if (uiState is AuthUiState.Error) {
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = (uiState as AuthUiState.Error).message,
+                    text = (uiState as AuthUiState.Error).message,
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall
                     )
@@ -116,7 +116,7 @@ fun LoginScreen(
                     onClick = { viewModel.login(username, password) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Primary),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     contentPadding = PaddingValues(vertical = 16.dp)
                 ) {
                     Text("Entrar", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
@@ -128,7 +128,7 @@ fun LoginScreen(
         TextButton(onClick = onNavigateToRegister) {
             Text(
                 "Não tem conta? Cadastre-se",
-                color = Primary,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.bodyMedium
             )
         }

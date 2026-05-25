@@ -48,13 +48,13 @@ fun HomeScreen(
                         Text(
                             "HabitFlow",
                             style = MaterialTheme.typography.titleLarge,
-                            color = Primary,
+                            color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             "Olá, ${state.userName}!",
                             style = MaterialTheme.typography.bodySmall,
-                            color = OnSurfaceVar
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 },
@@ -63,14 +63,14 @@ fun HomeScreen(
                         viewModel.logout()
                         onLogout()
                     }) {
-                        Icon(Icons.Default.Logout, contentDescription = "Sair", tint = OnSurfaceVar)
+                        Icon(Icons.Default.Logout, contentDescription = "Sair", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Background)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Surface) {
+            NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 NavigationBarItem(
                     selected = true,
                     onClick = {},
@@ -88,14 +88,14 @@ fun HomeScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onAddHabit,
-                containerColor = Primary,
-                contentColor = OnPrimary,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
                 shape = CircleShape
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Novo Hábito")
             }
         },
-        containerColor = Background
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         when {
             state.isLoading -> {
@@ -103,7 +103,7 @@ fun HomeScreen(
                     Modifier.fillMaxSize().padding(padding),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator(color = Primary)
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                 }
             }
             state.error != null -> {
@@ -155,7 +155,7 @@ private fun QuoteCard(quote: QuoteData) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
@@ -165,7 +165,7 @@ private fun QuoteCard(quote: QuoteData) {
             Text(
                 "❝",
                 style = MaterialTheme.typography.headlineMedium,
-                color = Primary,
+                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.ExtraBold,
                 modifier = Modifier.padding(end = 10.dp, top = 2.dp)
             )
@@ -173,14 +173,14 @@ private fun QuoteCard(quote: QuoteData) {
                 Text(
                     quote.text,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = OnBackground,
+                    color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Medium
                 )
                 Spacer(Modifier.height(6.dp))
                 Text(
                     "— ${quote.author}",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Primary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -196,7 +196,7 @@ private fun ProgressCard(completed: Int, total: Int) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = Surface),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
@@ -204,18 +204,18 @@ private fun ProgressCard(completed: Int, total: Int) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(Modifier.weight(1f)) {
-                Text(dateStr, style = MaterialTheme.typography.labelSmall, color = OnSurfaceVar)
+                Text(dateStr, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(4.dp))
                 Text(
                     "Seu Progresso",
                     style = MaterialTheme.typography.headlineMedium,
-                    color = OnBackground
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
                     "$completed de $total hábitos",
                     style = MaterialTheme.typography.titleMedium,
-                    color = Primary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(Modifier.height(4.dp))
@@ -225,22 +225,22 @@ private fun ProgressCard(completed: Int, total: Int) {
                     progress >= 0.5f -> "Você está no caminho certo!"
                     else -> "Vamos lá, você consegue!"
                 }
-                Text(msg, style = MaterialTheme.typography.bodySmall, color = OnSurfaceVar)
+                Text(msg, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Spacer(Modifier.width(16.dp))
             Box(contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(
                     progress = { progress },
                     modifier = Modifier.size(64.dp),
-                    color = Primary,
-                    trackColor = PrimaryLight,
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.primaryContainer,
                     strokeWidth = 6.dp,
                     strokeCap = StrokeCap.Round
                 )
                 Text(
                     "${(progress * 100).toInt()}%",
                     style = MaterialTheme.typography.labelLarge,
-                    color = Primary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -260,7 +260,7 @@ private fun HabitCard(
     var showMenu by remember { mutableStateOf(false) }
 
     val bgColor by animateColorAsState(
-        targetValue = if (done) PrimaryLight else Surface,
+        targetValue = if (done) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
         animationSpec = tween(300),
         label = "cardBg"
     )
@@ -296,7 +296,7 @@ private fun HabitCard(
                 Text(
                     text = habit.nome,
                     style = MaterialTheme.typography.titleMedium,
-                    color = if (done) PrimaryDark else OnBackground,
+                    color = if (done) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold
                 )
                 Spacer(Modifier.height(2.dp))
@@ -304,20 +304,20 @@ private fun HabitCard(
                     Text(
                         "Concluído às ${habitStatus.completedAt}",
                         style = MaterialTheme.typography.bodySmall,
-                        color = Primary
+                        color = MaterialTheme.colorScheme.primary
                     )
                 } else {
                     Text(
                         habit.categoria,
                         style = MaterialTheme.typography.bodySmall,
-                        color = OnSurfaceVar
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
             Box {
                 IconButton(onClick = { showMenu = true }) {
-                    Icon(Icons.Default.MoreVert, contentDescription = null, tint = OnSurfaceVar)
+                    Icon(Icons.Default.MoreVert, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                     DropdownMenuItem(
@@ -326,16 +326,16 @@ private fun HabitCard(
                         leadingIcon = { Icon(Icons.Default.Edit, null) }
                     )
                     DropdownMenuItem(
-                        text = { Text("Excluir", color = Error) },
+                        text = { Text("Excluir", color = MaterialTheme.colorScheme.error) },
                         onClick = { showMenu = false; onDelete() },
-                        leadingIcon = { Icon(Icons.Default.Delete, null, tint = Error) }
+                        leadingIcon = { Icon(Icons.Default.Delete, null, tint = MaterialTheme.colorScheme.error) }
                     )
                 }
             }
 
             IconButton(onClick = onToggle) {
                 val iconColor by animateColorAsState(
-                    targetValue = if (done) Primary else OnSurfaceVar.copy(alpha = 0.4f),
+                    targetValue = if (done) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                     animationSpec = tween(300),
                     label = "checkColor"
                 )
@@ -360,25 +360,25 @@ private fun EmptyState(onAdd: () -> Unit) {
             Icons.Default.AddTask,
             contentDescription = null,
             modifier = Modifier.size(64.dp),
-            tint = PrimaryLight
+            tint = MaterialTheme.colorScheme.primaryContainer
         )
         Spacer(Modifier.height(16.dp))
         Text(
             "Nenhum hábito ainda",
             style = MaterialTheme.typography.titleMedium,
-            color = OnSurfaceVar
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(Modifier.height(8.dp))
         Text(
             "Adicione seu primeiro hábito\ne comece sua jornada!",
             style = MaterialTheme.typography.bodyMedium,
-            color = OnSurfaceVar.copy(alpha = 0.6f),
+            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
             textAlign = androidx.compose.ui.text.style.TextAlign.Center
         )
         Spacer(Modifier.height(24.dp))
         Button(
             onClick = onAdd,
-            colors = ButtonDefaults.buttonColors(containerColor = Primary),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             shape = RoundedCornerShape(12.dp)
         ) {
             Icon(Icons.Default.Add, contentDescription = null)

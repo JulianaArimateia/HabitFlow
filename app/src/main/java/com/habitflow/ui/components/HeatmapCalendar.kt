@@ -1,9 +1,11 @@
 package com.habitflow.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,13 +23,14 @@ fun HeatmapCalendar(data: Map<Long, Int>, modifier: Modifier = Modifier) {
     val days = DateUtils.currentMonthDays()
     val offset = DateUtils.firstDayOfMonthDayOfWeek()
     val maxVal = data.values.maxOrNull()?.coerceAtLeast(1) ?: 1
+    val isDark = isSystemInDarkTheme()
 
     Column(modifier = modifier) {
         // Day of week headers
         Row(Modifier.fillMaxWidth()) {
             DAY_HEADERS.forEach { label ->
                 Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                    Text(label, fontSize = 9.sp, color = OnSurfaceVar)
+                    Text(label, fontSize = 9.sp, color = if (isDark) OnSurfaceVarDarkTheme else MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
@@ -52,7 +55,7 @@ fun HeatmapCalendar(data: Map<Long, Int>, modifier: Modifier = Modifier) {
                                 if (dayIndex < 0 || dayIndex >= days.size) Color.Transparent
                                 else {
                                     val count = data[days[dayIndex]] ?: 0
-                                    intensityColor(count, maxVal)
+                                    intensityColor(count, maxVal, isDark)
                                 }
                             )
                     )
@@ -62,12 +65,12 @@ fun HeatmapCalendar(data: Map<Long, Int>, modifier: Modifier = Modifier) {
     }
 }
 
-private fun intensityColor(count: Int, max: Int): Color {
-    if (count == 0) return HeatmapEmpty
+private fun intensityColor(count: Int, max: Int, isDark: Boolean): Color {
+    if (count == 0) return if (isDark) HeatmapEmptyDark else HeatmapEmpty
     val ratio = count.toFloat() / max
     return when {
-        ratio <= 0.33f -> HeatmapLow
-        ratio <= 0.66f -> HeatmapMid
-        else           -> HeatmapHigh
+        ratio <= 0.33f -> if (isDark) HeatmapLowDark else HeatmapLow
+        ratio <= 0.66f -> if (isDark) HeatmapMidDark else HeatmapMid
+        else           -> if (isDark) HeatmapHighDark else HeatmapHigh
     }
 }

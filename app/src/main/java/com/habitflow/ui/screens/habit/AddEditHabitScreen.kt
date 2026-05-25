@@ -72,10 +72,10 @@ fun AddEditHabitScreen(
                         Icon(Icons.Default.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Background)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
-        containerColor = Background
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -89,7 +89,7 @@ fun AddEditHabitScreen(
                 Text(
                     "Comece uma nova jornada de evolução pessoal.",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = OnSurfaceVar
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -98,7 +98,7 @@ fun AddEditHabitScreen(
                 OutlinedTextField(
                     value = state.nome,
                     onValueChange = viewModel::onNomeChange,
-                    placeholder = { Text("Ex: Meditação Matinal", color = OnSurfaceVar) },
+                    placeholder = { Text("Ex: Meditação Matinal", color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -141,7 +141,7 @@ fun AddEditHabitScreen(
             FormSection(title = "FREQUÊNCIA") {
                 Card(
                     shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(containerColor = Surface)
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                 ) {
                     Column(Modifier.padding(4.dp)) {
                         Row(Modifier.fillMaxWidth()) {
@@ -176,21 +176,21 @@ fun AddEditHabitScreen(
             FormSection(title = "HORÁRIO PREFERENCIAL") {
                 Card(
                     shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(containerColor = Surface),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth().padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(Icons.Default.AccessTime, contentDescription = null, tint = Primary)
+                        Icon(Icons.Default.AccessTime, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Spacer(Modifier.width(12.dp))
                         Column(Modifier.weight(1f)) {
                             Text(
                                 state.horario,
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
-                                color = OnBackground
+                                color = MaterialTheme.colorScheme.onBackground
                             )
                             val (h, _) = state.horario.split(":").let {
                                 (it.getOrNull(0)?.toIntOrNull() ?: 7) to (it.getOrNull(1)?.toIntOrNull() ?: 0)
@@ -202,7 +202,7 @@ fun AddEditHabitScreen(
                                     else -> "Noite"
                                 },
                                 style = MaterialTheme.typography.bodySmall,
-                                color = OnSurfaceVar
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                         OutlinedButton(
@@ -219,25 +219,25 @@ fun AddEditHabitScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(containerColor = PrimaryLight)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
             ) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
-                    Icon(Icons.Default.NotificationsActive, contentDescription = null, tint = Primary)
+                    Icon(Icons.Default.NotificationsActive, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.width(12.dp))
                     Column {
-                        Text("DICA FLOW", style = MaterialTheme.typography.labelSmall, color = Primary, fontWeight = FontWeight.Bold)
+                        Text("DICA FLOW", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                         Spacer(Modifier.height(4.dp))
                         Text(
                             "Notificações inteligentes ajustam automaticamente o horário baseado no seu histórico.",
                             style = MaterialTheme.typography.bodySmall,
-                            color = PrimaryDark
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }
             }
 
             if (state.error != null) {
-                Text(state.error!!, color = Error, style = MaterialTheme.typography.bodySmall)
+                Text(state.error!!, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
             }
 
             Spacer(Modifier.height(8.dp))
@@ -245,7 +245,7 @@ fun AddEditHabitScreen(
                 onClick = { viewModel.save(habitId) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Primary),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 contentPadding = PaddingValues(vertical = 16.dp),
                 enabled = !state.isLoading
             ) {
@@ -267,7 +267,7 @@ private fun FormSection(title: String, content: @Composable ColumnScope.() -> Un
         Text(
             title,
             style = MaterialTheme.typography.labelSmall,
-            color = Primary,
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold,
             letterSpacing = 1.sp
         )
@@ -281,7 +281,7 @@ private fun RowScope.FreqTab(label: String, selected: Boolean, onClick: () -> Un
         modifier = Modifier
             .weight(1f)
             .clip(RoundedCornerShape(8.dp))
-            .background(if (selected) Primary else Color.Transparent)
+            .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
             .clickable(onClick = onClick)
             .padding(vertical = 10.dp),
         contentAlignment = Alignment.Center
@@ -289,7 +289,7 @@ private fun RowScope.FreqTab(label: String, selected: Boolean, onClick: () -> Un
         Text(
             label,
             style = MaterialTheme.typography.labelLarge,
-            color = if (selected) OnPrimary else OnSurfaceVar,
+            color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal
         )
     }
@@ -301,15 +301,15 @@ private fun DayCircle(label: String, selected: Boolean, onClick: () -> Unit) {
         modifier = Modifier
             .size(40.dp)
             .clip(CircleShape)
-            .background(if (selected) Primary else Surface)
-            .border(1.dp, if (selected) Primary else OnSurfaceVar.copy(alpha = 0.3f), CircleShape)
+            .background(if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface)
+            .border(1.dp, if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f), CircleShape)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Text(
             label,
             style = MaterialTheme.typography.labelLarge,
-            color = if (selected) OnPrimary else OnSurfaceVar,
+            color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
         )
     }

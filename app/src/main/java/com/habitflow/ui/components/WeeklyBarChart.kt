@@ -3,6 +3,7 @@ package com.habitflow.ui.components
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -31,7 +32,7 @@ private val WEEK_LABELS: List<String>
 @Composable
 fun WeeklyBarChart(data: List<Float>, modifier: Modifier = Modifier) {
     val labels = WEEK_LABELS
-    val barColor = Primary
+    val barColor = MaterialTheme.colorScheme.primary
     val trackColor = HeatmapEmpty
 
     Column(modifier = modifier) {
@@ -66,7 +67,7 @@ fun WeeklyBarChart(data: List<Float>, modifier: Modifier = Modifier) {
                     text = label,
                     modifier = Modifier.weight(1f),
                     fontSize = 9.sp,
-                    color = OnSurfaceVar,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = androidx.compose.ui.text.style.TextAlign.Center
                 )
             }
